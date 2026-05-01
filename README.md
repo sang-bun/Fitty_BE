@@ -70,4 +70,3 @@
 ## 🔗 5. 링크
 
 - **팀 프로젝트 원본 레포지토리:** [Fitty_BE 바로가기](https://github.com/Fitty-UMC-8th/Fitty_BE)  
-- **API 명세서:** *(URL을 입력해 주세요)*  
