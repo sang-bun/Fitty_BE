@@ -26,9 +26,7 @@
 ### API & Web
 
 - Spring Web (RESTful API 설계 및 구현)  
-- Spring WebFlux (비동기/논블로킹 로직 활용)  
 - Swagger (SpringDoc OpenAPI 3를 통한 API 문서화)  
-- Thymeleaf (서버 사이드 렌더링 화면 구현)  
 
 ### Build & Environment
 
