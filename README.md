@@ -1,53 +1,75 @@
 # 🚀 Fitty - 백엔드 포트폴리오 (포크된 레포지토리)
 
-> **💡 본 레포지토리는 팀 프로젝트 [Fitty_BE](https://github.com/Fitty-UMC-8th/Fitty_BE)를 기반으로, 백엔드 개발자 [상번]의 기여도를 중심으로 재구성된 포트폴리오용 레포지토리입니다.**
+> **💡 본 레포지토리는 팀 프로젝트 [Fitty_BE](https://github.com/Fitty-UMC-8th/Fitty_BE)를 기반으로, 저의 기여도를 중심으로 재구성된 포트폴리오용 레포지토리입니다.**
 
 ## 📌 1. 프로젝트 개요 및 나의 역할
+
 - **프로젝트 한줄 소개:** 운동을 인증할 때마다 캐릭터가 성장하는 디지털 헬스케어 서비스
-- **개발 기간:** 2025.09 ~ 2025.09 (1개월)
-- **나의 역할:** Back-end (ㅇㅇ 도메인, ㅇㅇ API 개발 담당)
+- **개발 기간:** 2025.09 ~ 2025.09 (1개월 / 3주 MVP)
+- **나의 역할:** Back-end (RECORD, CHARACTER, FEED 도메인 및 API 개발)
+- **기여도 요약:** 서비스 핵심 순환(운동 기록 → 달성률 반영)의 데이터 축인 운동 기록 API, 함께 구성한 캐릭터 API, 그리고 친구 피드의 댓글 API를 설계·구현하여 ‘캐릭터와의 약속’과 ‘커뮤니티 응원’을 백엔드에서 연결했습니다.
 
 ## 🛠 2. 활용 기술 스택 (Tech Stack)
-*(팀 전체의 기술이 아닌, 본인이 직접 다루고 코드를 작성한 기술 위주로 작성했습니다.)*
 
-- **Language & Framework**
-  - `Java 21`
-  - `Spring Boot 3.5.5`
-- **Database & ORM**
-  - `MySQL`
-  - `Spring Data JPA`, `Spring Data JDBC`
-- **API & Web**
-  - `Spring Web` (RESTful API 설계 및 구현)
-  - `Spring WebFlux` (비동기/논블로킹 처리 또는 외부 API 호출 활용)
-  - `Swagger` (SpringDoc OpenAPI 3를 통한 API 문서화)
-  - `Thymeleaf` (서버 사이드 렌더링 화면 구현)
-- **Build & Environment**
-  - `Gradle`
-  - `Lombok`, `Bean Validation`
+*(팀 전체 스택이 아닌, 본인이 직접 다루며 코드를 작성한 기술 위주입니다.)*
+
+### Language & Framework
+
+- Java 21  
+- Spring Boot 3.5.5  
+
+### Database & ORM
+
+- MySQL  
+- Spring Data JPA, Spring Data JDBC  
+
+### API & Web
+
+- Spring Web (RESTful API 설계 및 구현)  
+- Spring WebFlux (비동기/논블로킹 로직 활용)  
+- Swagger (SpringDoc OpenAPI 3를 통한 API 문서화)  
+- Thymeleaf (서버 사이드 렌더링 화면 구현)  
+
+### Build & Environment
+
+- Gradle  
+- Lombok, Bean Validation  
 
 ## 🔥 3. 주요 담당 업무 및 기여도 (My Contributions)
-*(🚨여기에 상번님이 실제로 코드를 짜면서 구현한 핵심 비즈니스 로직을 적어주세요. 아래는 예시입니다.)*
 
-- **[핵심 기능 A, 예: 운동 인증 및 캐릭터 경험치 부여 API 구현]**
-  - Spring Data JPA를 활용하여 운동 기록 데이터와 캐릭터 상태 간의 복잡한 연관관계 매핑 및 비즈니스 로직 구현.
-  - Bean Validation을 활용하여 클라이언트의 요청 데이터(DTO) 정합성 검증 로직 추가.
+### 운동 기록(RECORD) 도메인 비즈니스 로직 및 API 구현
 
-- **[핵심 기능 B, 예: Spring WebFlux를 활용한 비동기 로직 처리]**
-  - 캐릭터 레벨업 시 외부 알림 API를 호출할 때 발생하는 지연 시간을 줄이기 위해 WebClient를 활용하여 비동기 논블로킹 처리.
+- 주차 단위 목표(Goal)와 연동하여, 운동 기록 생성(`POST /records`) 시 진행 거리·시간·횟수를 목표 진행도에 즉시 반영하는 로직 설계  
+- 기록 삭제(`DELETE`) 시 누적된 목표 달성률을 안전하게 역산(Rollback)하여 데이터 무결성 유지  
 
-- **RESTful API 설계 및 Swagger 명세화**
-  - 프론트엔드와의 원활한 협업을 위해 SpringDoc을 활용하여 직관적인 API 문서 자동화 및 테스트 환경 구축.
+### 사용자 맞춤형 캐릭터(CHARACTER) 리소스 관리
 
-## 💡 4. 트러블 슈팅 (Troubleshooting)
-*(🚨가장 머리 아팠던 DB 쿼리 문제, 로직 에러, 또는 성능 개선 경험 1가지를 적어주세요)*
+- 사용자 1:1 매핑을 통한 캐릭터 생성·조회·수정 API 구현  
+- `@NotBlank`, `@Size` 등 Bean Validation을 활용한 클라이언트 DTO 정합성 검증 및 `CharacterType` Enum 처리로 잘못된 데이터 적재 방지  
 
-### 🚨 문제 상황 (Issue)
-- (예시: 사용자가 운동 인증을 조회할 때 N+1 문제로 인한 쿼리 폭발 및 응답 속도 지연 현상 발생)
+### 소셜 피드(FEED) 댓글 기능 및 공통 API 설계
 
-### 🎯 해결 방법 (Solution)
-- (어떤 고민을 했고 어떻게 해결했는지 구체적으로 작성. 예: Fetch Join 적용으로 쿼리 수를 N개에서 1개로 줄이고 응답 속도 50% 개선)
-- [관련 PR 혹은 블로그 링크](URL)
+- 운동 기록 단위의 댓글 작성 및 목록 조회 기능 구현  
+- 페이지네이션(고정 Size 10) 및 최신순(`createdAt DESC`) 정렬 적용으로 대량 댓글 조회 시 부하 관리  
+- `ApiResponse<T>` 형태의 공통 응답 래퍼로 프론트엔드와 일관된 통신 규약 확립  
+
+## 💡 4. 트러블 슈팅 및 협업 경험 (Troubleshooting & Collaboration)
+
+### 🎯 4.1. [기술] 기록 삭제 시 목표 달성률 데이터 무결성 보장
+
+**🚨 문제 상황:** 사용자가 운동 기록을 삭제(`DELETE`)할 때, 이미 누적 반영된 주간 목표(Goal)의 달성률(진행 거리, 시간, 횟수)이 정확하게 차감되지 않거나, 비정상적인 삭제로 달성률이 음수로 떨어지는 등 데이터 무결성이 깨질 위험이 있었습니다.
+
+**💡 해결 방법:** 단순히 DB에서 기록만 바로 지우지 않고, 삭제할 기록을 먼저 조회한 뒤 `Goal.decreaseProgress`를 도메인 객체 안에 두어 차감과 **음수 방지 로직**을 캡슐화했습니다. 무결성을 맞춘 뒤 기록을 삭제하도록 트랜잭션으로 묶었습니다.
+
+### 🤝 4.2. [협업] 소통 부족으로 인한 일정 위기와 스펙 아웃(Spec-out)
+
+**🚨 문제 상황:** 초기 기획 단계에서 프론트·백엔드 간 상세 기능 명세 공유가 부족해 로직 중복·API 규격 불일치가 발생했고, 재작업이 잦아 데모 마감 전 전 기능 완성이 어려운 상황에 직면했습니다.
+
+**💡 극복 방법:** 긴급 회의로 진행 상황을 공유하고 한계를 인정한 뒤, 핵심 가치(운동 기록, 캐릭터 피드백)에 집중하고 우선순위가 낮은 부가 기능(알림 상세 등)은 과감히 제거하는 **스펙 아웃**으로 조정했습니다.
+
+**📈 결과:** 핵심 기능 완성도에 리소스를 모아 데드라인 내 MVP 시연·배포를 마칠 수 있었습니다.
 
 ## 🔗 5. 링크
-- **팀 프로젝트 원본 레포지토리:** [Fitty_BE 레포지토리 바로가기](https://github.com/Fitty-UMC-8th/Fitty_BE)
-- **API 명세서:** [URL]
+
+- **팀 프로젝트 원본 레포지토리:** [Fitty_BE 바로가기](https://github.com/Fitty-UMC-8th/Fitty_BE)  
+- **API 명세서:** *(URL을 입력해 주세요)*  
